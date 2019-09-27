@@ -16,4 +16,5 @@ dependencies {
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
     compile group: 'com.jakewharton.fliptables', name: 'fliptables', version: '1.0.2'
     compile group: 'de.vandermeer', name: 'asciitable', version: '0.3.2'
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.0'
 }

@@ -10,12 +10,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import util.ExcelWriter;
 import util.TextEdit;
 import util.UrlFactory;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.logging.Level;
 
 public class Origin {
 
@@ -33,7 +35,8 @@ public class Origin {
         TextEdit textEdit = new TextEdit();
         ArrayList<Jobs> jobsArrayList = new ArrayList<>();
         ArrayList<String> countries = new ArrayList<>();
-        AsciiTable at = new AsciiTable();
+        ExcelWriter excelWriter = new ExcelWriter();
+        java.util.logging.Logger.getLogger("org.openqa.selenium").setLevel(Level.OFF);
 
         for(String c : master){
             countries.add(c);
@@ -42,7 +45,7 @@ public class Origin {
 
         for(String country : countries){
 
-            driver.get(urlFactory.buildUrl(country, "2", "Software Developer"));
+            driver.get(urlFactory.buildUrl(country, "2", "android developer"));
             driver.findElement(By.xpath(Xpath.expButton)).click();
             String val = textEdit.trimBrackets(driver.findElement(By.xpath(Xpath.jobCount)).getText());
             String cleanVal = val.replace(",","");
@@ -50,9 +53,6 @@ public class Origin {
             jobsArrayList.add(new Jobs(country, Integer.parseInt(cleanVal)));
         }
         Collections.sort(jobsArrayList);
-        for(Jobs job : jobsArrayList){
-            System.out.println(job.getCountryName()+":"+job.getJobCount());
-        }
-
+        excelWriter.write(jobsArrayList,"Entry Level Android Developer Jobs");
     }
 }
