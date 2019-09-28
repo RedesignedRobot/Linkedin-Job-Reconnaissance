@@ -18,3 +18,12 @@ dependencies {
     compile group: 'de.vandermeer', name: 'asciitable', version: '0.3.2'
     compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.0'
 }
+
+task customFatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'core.Origin'
+    }
+    baseName = 'hydra-fat-jar-v1'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
