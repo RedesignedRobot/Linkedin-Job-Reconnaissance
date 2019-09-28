@@ -37,6 +37,7 @@ public class Miner {
 
 
         countries.forEach(country -> {
+            cp.green("Searching: "+country);
             driver.get(urlFactory.buildUrl(country, exp, job));
             driver.findElement(By.xpath(Xpath.expButton)).click();
             String val = textEdit.trimBrackets(driver.findElement(By.xpath(Xpath.jobCount)).getText());
@@ -52,6 +53,7 @@ public class Miner {
 
     }
 
+    @Deprecated
     public void mine(String exp, String job, String title, boolean headless) {
         WebDriver driver;
         if (headless) {

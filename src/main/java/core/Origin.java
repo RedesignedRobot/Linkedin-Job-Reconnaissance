@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class Origin {
 
     public static void main(String[] args) {
+        System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
         Console console = new Console();
         Miner miner = new Miner();
         Scanner scanner = new Scanner(System.in);
